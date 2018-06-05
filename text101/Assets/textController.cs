@@ -10,6 +10,7 @@ public class textController : MonoBehaviour {
 	// cell, mirror, sheets_0, lock_0, sheets_1, cell_mirror, lock_1, freedom
 	private Dictionary<string, System.Action> States = new Dictionary<string, System.Action>();
 	private string myState;
+	private string input;
 	
 	// Use this for initialization
 	void Start () {
@@ -18,6 +19,8 @@ public class textController : MonoBehaviour {
 		States.Add("lock_0", state_lock_0);
 		States.Add("mirror", state_mirror);
 		States.Add("cell_mirror", state_cell_mirror);
+		States.Add("sheets_1", state_sheets_1);
+		States.Add("lock_1", state_lock_1);
 		myState = "cell";
 	}
 	
@@ -26,6 +29,22 @@ public class textController : MonoBehaviour {
 		
 		States[myState]();
 
+	}
+
+	void state_lock_1() {
+
+		text.text = "By holding the mirror close to the keypad, you are able to make out the smudge of the guard's fingerprints on numbers 3, 3, and 6.\n\nTo go back to the cell, press C. To enter the keycode \"336\", press K. To examine the lock more closely, press E.";
+
+	}
+
+	void state_sheets_1() {
+	
+		text.text = "The sheets' reflection looks as dirty as the original.\n\nTo go back to the cell, press C.";
+
+		if(Input.GetKeyDown(KeyCode.C)) {
+			myState = "cell_mirror";
+		}
+	
 	}
 
 	void state_cell() {
